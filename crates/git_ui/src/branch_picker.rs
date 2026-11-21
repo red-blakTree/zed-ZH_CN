@@ -8,8 +8,8 @@ use gpui::http_client::Url;
 use gpui::{
     Action, App, Context, DismissEvent, Entity, EventEmitter, FocusHandle, Focusable, Global,
     InteractiveElement, IntoElement, Modifiers, ModifiersChangedEvent, ParentElement, PromptButton,
-    PromptLevel, Render, SharedString, Styled, Subscription, Task, WeakEntity, Window,
-    actions, rems,
+    PromptLevel, Render, SharedString, Styled, Subscription, Task, WeakEntity, Window, actions,
+    rems,
 };
 use picker::{Picker, PickerDelegate, PickerEditorPosition};
 use project::git_store::{Repository, RepositoryEvent};
