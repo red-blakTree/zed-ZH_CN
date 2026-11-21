@@ -3,6 +3,8 @@
 > 只追加、不修改历史。可用 `grep "^## \[" docs/wiki/log.md | tail -5` 看最近记录。
 > 前缀格式：`## [YYYY-MM-DD] <init|feat|fix|query|lint|chore> | <简述>`
 
+## [2026-11-21] fix | 修复 Linux 包在非 GCC 12 环境打不开窗口：旧 bundle 把构建机（Ubuntu 22.04 / GCC 12，最高 GLIBCXX_3.4.30）的 libstdc++.so.6 打进包，经 DT_RPATH 覆盖系统库，宿主 Mesa 的 libSPIRV-Tools 需要 GLIBCXX_3.4.32，加载失败后 wgpu 报 `enumerate_adapters: Initialization of an object has failed`、`No GPU adapters found`；`script/bundle-linux` 不再打包 libstdc++（实测同一机器上替换/移除后恢复 `Rendered first frame`）。同期 release.yml 改为仅构建 Linux、runner 换 ubuntu-latest、clang/lld/llvm 改用发行版包并补 llvm-objcopy 链接，仓库地址迁移到 red-blakTree/zed-ZH_CN
+
 ## [2026-11-13] chore | 发布 v1.29.1（2026-11-14 完成）：合并 upstream/main（1.30.0，76 提交）与两处修复后，删除首轮旧标签、在 `a8c7029f60` 重打附注标签 `v1.29.1` 推送，run 43379538856 全绿（verify 8s / Linux 83m / macOS 102m / Windows 96m / 发布 34s），Release「Zed 1.29.1 (汉化版)」标记 Latest，target_commitish 与标签同指 a8c7029f60，7 个产物齐全（含 zed-zh-cn_1.29.1_amd64.deb 74.5 MB）；同期记录版本号规则（用户指定，唯一例外「版本号与上游一致」）并更新 fork-release-publishing
 
 ## [2026-11-13] chore | 记录发布版本号规则：Agent 不自行决定或修改版本号，必须等用户明确指定 `X.Y.Z` 后才写 `Cargo.toml`/`Cargo.lock`、改 README/RELEASE_NOTES 并打 `v*` 标签；未收到通知时只做合并/修复/验证/文档；补充唯一例外——用户明确说「版本号与上游一致」时可用 `sync-upstream-version.py` 同步上游版本（默认 upstream/main）后发布（写入 fork-release-publishing）
