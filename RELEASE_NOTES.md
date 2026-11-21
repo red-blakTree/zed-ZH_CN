@@ -1,4 +1,4 @@
-本版本发布为 **v1.29.1**（版本号沿用上一轮），代码基线为 upstream/main 的 `27bbbc1cc4`（上游 `Cargo.toml` 为 1.30.0），本次合并了 76 个上游提交。
+本版本发布为 **v1.29.3**（与上游最新正式发布 1.29.3 对齐），代码基线为 upstream/main 的 `27bbbc1cc4`（上游 `Cargo.toml` 为 1.30.0），本次合并了 76 个上游提交；另含 Linux 打包与发布链路修复（见下）。
 
 ### Zed 上游更新（1.29.0 之后）
 
@@ -24,9 +24,9 @@
 
 ### 安装包与发布链路
 
-- **Ubuntu / Debian**：`zed-zh-cn_1.29.1_amd64.deb`，安装到 `/usr/lib/zed`，注册 `/usr/bin/zed`、桌面项与图标；`Depends` 由 `ldd` 实测推导，并对 Ubuntu 24.04 的 t64 改名写备选。
+- **Ubuntu / Debian**：`zed-zh-cn_1.29.3_amd64.deb`，安装到 `/usr/lib/zed`，注册 `/usr/bin/zed`、桌面项与图标；`Depends` 由 `ldd` 实测推导，并对 Ubuntu 24.04 的 t64 改名写备选。
 - **构建机**：`ubuntu-latest`（GCC ≥ 13，`GLIBCXX` ≥ 3.4.33）；本轮只发布 Linux 产物（`.deb` 与 `tar.gz`），不再产出 Windows / macOS 安装包。
-- **版本号**：`1.29.1` 由发布者指定，`release.yml` 校验其不低于上游最新正式 release（当前 1.28.1）、与 `Cargo.lock` 一致，且标签名与 `crates/zed/Cargo.toml` 一致；代码基线 1.30.0 高于版本号属预期，下一轮发布再对齐。
+- **版本号**：`1.29.3` 由发布者指定，与上游最新正式 release 对齐（当前 1.29.3）；`release.yml` 校验其不低于上游正式版、与 `Cargo.lock` 一致，且标签名与 `crates/zed/Cargo.toml` 一致；代码基线 1.30.0 高于版本号属预期，下一轮发布再对齐。
 - `run_tests.yml` 仅手动触发（`workflow_dispatch`），`check_style` 含汉化键完整性检查。
 
 ### 已知说明
