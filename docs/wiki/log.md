@@ -3,6 +3,8 @@
 > 只追加、不修改历史。可用 `grep "^## \[" docs/wiki/log.md | tail -5` 看最近记录。
 > 前缀格式：`## [YYYY-MM-DD] <init|feat|fix|query|lint|chore> | <简述>`
 
+## [2026-11-21] chore | 发布 v1.29.3：版本 1.29.1 → 1.29.3（上游 stable 1.29.3，否则 verify_version 报「低于上游」），`sync-upstream-version.py --version` 写 Cargo.toml/Cargo.lock，README 与 RELEASE_NOTES 同步；附注标签 `v1.29.3`（提交 `dbd9f6b167`）触发 run 44858463228，verify 9s / Linux 1h17m18s / 发布 38s 全绿，Release「Zed 1.29.3 (汉化版)」标记 Latest，3 个 Linux 产物（deb 69.9 MB / tar.gz 89.6 MB / remote-server 36.9 MB）；下载 tar.gz 实测 `lib/` 已无 libstdc++.so.6，容器内自报 `Zed 1.29.3 dbd9f6b` 并 `Rendered first frame`；同期修 fmt 红灯（`5f2f8beaf3`，key_context_view 汉化替换后缩进错乱、branch_picker 导入顺序）
+
 ## [2026-11-21] fix | 修复 Linux 包在非 GCC 12 环境打不开窗口：旧 bundle 把构建机（Ubuntu 22.04 / GCC 12，最高 GLIBCXX_3.4.30）的 libstdc++.so.6 打进包，经 DT_RPATH 覆盖系统库，宿主 Mesa 的 libSPIRV-Tools 需要 GLIBCXX_3.4.32，加载失败后 wgpu 报 `enumerate_adapters: Initialization of an object has failed`、`No GPU adapters found`；`script/bundle-linux` 不再打包 libstdc++（实测同一机器上替换/移除后恢复 `Rendered first frame`）。同期 release.yml 改为仅构建 Linux、runner 换 ubuntu-latest、clang/lld/llvm 改用发行版包并补 llvm-objcopy 链接，仓库地址迁移到 red-blakTree/zed-ZH_CN
 
 ## [2026-11-13] chore | 发布 v1.29.1（2026-11-14 完成）：合并 upstream/main（1.30.0，76 提交）与两处修复后，删除首轮旧标签、在 `a8c7029f60` 重打附注标签 `v1.29.1` 推送，run 43379538856 全绿（verify 8s / Linux 83m / macOS 102m / Windows 96m / 发布 34s），Release「Zed 1.29.1 (汉化版)」标记 Latest，target_commitish 与标签同指 a8c7029f60，7 个产物齐全（含 zed-zh-cn_1.29.1_amd64.deb 74.5 MB）；同期记录版本号规则（用户指定，唯一例外「版本号与上游一致」）并更新 fork-release-publishing

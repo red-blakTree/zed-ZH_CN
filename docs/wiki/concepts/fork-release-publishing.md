@@ -51,6 +51,7 @@ status: active
   6. **许可证**：`script/generate-licenses` 需要 `cargo-about 0.8.2`，缺失时先 `cargo install cargo-about@0.8.2 --locked`。
   7. 完整命令：`PATH="$PWD/tmp/bin:$PATH" LIBRARY_PATH="$PWD/tmp/syslibs" CC=clang-22 CXX=clang++-22 LLD=/usr/bin/ld.lld-22 REMOTE_SERVER_TARGET=x86_64-unknown-linux-gnu bash script/bundle-linux --skip-sentry`，随后 `bash script/bundle-linux-deb`。
 - 2026-11-13 发布 v1.29.1（**已发布**，2026-11-14 完成）：首轮在合并前的 `4d236e7002` 打标签触发 run 43358134925，构建中被取消（当时准备先合并上游）。合并 upstream/main（`27bbbc1cc4`，1.30.0，76 提交）并修复焦点句柄与两处未汉化文案后，删除旧标签、在 `a8c7029f60` 重打附注标签 `v1.29.1` 推送，run 43379538856 全绿：`verify_version` 8s、Linux 1m23m14s、macOS 1h41m35s、Windows 1h36m06s、发布 job 34s，总计 1h42m24s。Release「Zed 1.29.1 (汉化版)」标记 Latest，`target_commitish` 与标签同指 `a8c7029f60`，7 个产物齐全（`Zed-aarch64.dmg`、`Zed-x86_64.exe`、`zed-linux-x86_64.tar.gz`、`zed-zh-cn_1.29.1_amd64.deb` 74.5 MB、三个 `zed-remote-server-*`）。版本号沿用上一轮用户指定的 1.29.1，高于上游正式线 1.28.1；代码基线 1.30.0 高于版本号属预期。
+- 2026-11-21 发布 v1.29.3（**已发布**，首个 Linux-only / `ubuntu-latest` 构建）：先在 `crates/zed/Cargo.toml` 与 `Cargo.lock` 把版本 1.29.1 → 1.29.3（与上游 stable 对齐，否则 `verify_version` 失败），提交 `dbd9f6b167`；附注标签 `v1.29.3` 推送触发 run 44858463228，`verify_version` 9s / Linux 1h17m18s / 发布 38s 全绿，Release「Zed 1.29.3 (汉化版)」标记 Latest，3 个产物：`zed-zh-cn_1.29.3_amd64.deb` 69.9 MB、`zed-linux-x86_64.tar.gz` 89.6 MB、`zed-remote-server-linux-x86_64.gz` 36.9 MB。下载 tar.gz 实测：`lib/` 已无 `libstdc++.so.6`（改为依赖系统库），容器内以 llvmpipe 启动，自报 `Zed 1.29.3 dbd9f6b` 并 `Rendered first frame`，确认非 GCC 12 环境的启动问题修复生效。同期修正 `run_tests` 的 fmt 红灯（提交 `5f2f8beaf3`）。
 
 ## 关联页面
 
