@@ -193,8 +193,12 @@ llvm-objcopy --strip-debug --discard-all "${target_dir}/${target_triple}/release
 llvm-objcopy --strip-debug --discard-all "${target_dir}/${remote_server_triple}/release/remote-server" "${temp_dir}/remote_server"
 
 # Libs
-# Bundle libstdc++ so older supported systems can run binaries built with our
-# toolchain even when their system libstdc++.so.6 lacks required GLIBCXX symbols.
+# Never bundle libstdc++: the copy from the build image (Ubuntu 22.04, GLIBCXX
+# 3.4.30) wins over the system one via RPATH and breaks host GPU drivers that
+# need newer C++ symbols (Mesa's libSPIRV-Tools requires GLIBCXX_3.4.32),
+# leaving Zed with "No GPU adapters found". The binary itself needs at most
+# GLIBCXX_3.4.30 and glibc 2.35, so every system able to run it already ships
+# a new-enough libstdc++.
 #
 # Never bundle the GLib family or its private dependencies: host libraries that
 # get dlopen'd are built against the system GLib, and resolving them against an
@@ -202,7 +206,7 @@ llvm-objcopy --strip-debug --discard-all "${target_dir}/${remote_server_triple}/
 find_libs() {
     ldd ${target_dir}/${target_triple}/release/zed |\
         cut -d' ' -f3 |\
-        grep -v '\<\(libc.so\|libgcc_s.so\|libm.so\|libpthread.so\|libdl.so\|libasound.so\)' |\
+        grep -v '\<\(libc.so\|libgcc_s.so\|libm.so\|libpthread.so\|libdl.so\|libasound.so\|libstdc++.so\)' |\
         grep -v '\<\(libglib-2.0.so\|libgobject-2.0.so\|libgio-2.0.so\|libgmodule-2.0.so\|libpcre.so\|libpcre2-8.so\|libmount.so\|libblkid.so\|libselinux.so\|libffi.so\|libresolv.so\|libz.so\)'
 }
 
