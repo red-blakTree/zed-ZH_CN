@@ -11,7 +11,7 @@ status: active
 
 ## 定义
 
-本仓库是 zed-industries/zed 的简体中文汉化 fork（remote：`fork`=ReachForStar/zed-ZH_CN，`upstream`=zed-industries/zed）。周期性把 upstream/main 合并进本仓库 main，同时保留 fork 自有功能。
+本仓库是 zed-industries/zed 的简体中文汉化 fork（remote：`origin`=red-blakTree/zed-ZH_CN，`upstream`=zed-industries/zed）。周期性把 upstream/main 合并进本仓库 main，同时保留 fork 自有功能。
 
 ## 要点
 

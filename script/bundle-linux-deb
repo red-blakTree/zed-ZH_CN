@@ -214,12 +214,12 @@ Version: ${version}
 Section: editors
 Priority: optional
 Architecture: ${deb_arch}
-Maintainer: ReachForStar <ReachForStar@users.noreply.github.com>
+Maintainer: red-blakTree <red-blakTree@users.noreply.github.com>
 Installed-Size: ${installed_size}
 Depends: ${depends_list}
 Conflicts: zed
 Replaces: zed
-Homepage: https://github.com/ReachForStar/zed-ZH_CN
+Homepage: https://github.com/red-blakTree/zed-ZH_CN
 Description: Zed editor with Simplified Chinese interface (unofficial build)
  Zed is a high-performance, multiplayer code editor.
  .

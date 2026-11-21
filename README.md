@@ -64,7 +64,7 @@ crates/zed_i18n/locales/
 - **tabular_data_preview**：表格与 SQLite/CSV 预览的内联设置面板，挂载在上游 `TableView` 上。
 - **fs_watcher 健康检查**：`check_watch_health` + `watched_paths`，watch 丢失时自动重扫。
 - **Agent / Agent UI**：保留并强化 fork 特性，包括可恢复消息、混淆字符扫揃（请求与解析后路径同时检查）、markdown 内联图表缓存等。
-- **CI / 发布**：精简 `run_tests.yml` + `release.yml`（三平台未签名包自动发布）；`run_tests` 改为手动触发；`check_style` 增加汉化键完整性检查（`scripts/i18n/check-missing-keys.py`）。三个平台各自输出原生安装包：Linux 为 `.deb`（另附 tar.gz），Windows 为 `.exe` 安装器，macOS 为 `.dmg`。
+- **CI / 发布**：精简 `run_tests.yml` + `release.yml`（Linux 未签名包自动发布）；`run_tests` 改为手动触发；`check_style` 增加汉化键完整性检查（`scripts/i18n/check-missing-keys.py`）。只输出 Linux 原生安装包：`.deb`（另附 tar.gz），构建机为 `ubuntu-latest`。
 - **版本号**：不落后于上游最新正式 release，由 `scripts/sync-upstream-version.py` 指定、同步与校验；`release.yml` 校验 `Cargo.toml`/`Cargo.lock` 一致及版本下限，标签与 `Cargo.toml` 不一致则拒绝发布。
 - **分支策略**：`main` 为稳定发布分支（当前 `v1.29.1`），功能开发在 `develop` 分支进行并 PR 合并至 `main`。
 
@@ -73,7 +73,7 @@ crates/zed_i18n/locales/
 
 macOS、Linux 和 Windows 可直接[下载 Zed](https://zed.dev/download)，或通过包管理器安装（[macOS](https://zed.dev/docs/installation#macos)/[Linux](https://zed.dev/docs/linux#installing-via-a-package-manager)/[Windows](https://zed.dev/docs/windows#package-managers)）。
 
-> 本汉化版提供 GitHub Releases 三平台未签名包：[Releases 页面](https://github.com/ReachForStar/zed-ZH_CN/releases/latest)；或按下方开发指南自行从源码构建。
+> 本汉化版提供 GitHub Releases Linux 未签名包：[Releases 页面](https://github.com/red-blakTree/zed-ZH_CN/releases/latest)；或按下方开发指南自行从源码构建。
 
 | 系统 | 安装包 | 安装方式 |
 | --- | --- | --- |
@@ -96,7 +96,7 @@ macOS、Linux 和 Windows 可直接[下载 Zed](https://zed.dev/download)，或�
 
 参见 [CONTRIBUTING.md](./CONTRIBUTING.md) 了解贡献方式。
 
-汉化相关贡献请直接提交 PR 至本仓库（[ReachForStar/zed-ZH_CN](https://github.com/ReachForStar/zed-ZH_CN)）。
+汉化相关贡献请直接提交 PR 至本仓库（[red-blakTree/zed-ZH_CN](https://github.com/red-blakTree/zed-ZH_CN)）。
 
 ### 许可证
 
@@ -114,7 +114,7 @@ Zed 源代码主要采用 GPL-3.0-or-later 许可，标注部分采用 Apache-2.
 
 Zed 由 **Zed Industries, Inc.** 开发。如希望支持上游项目，可通过其 GitHub Sponsors 赞助，资金直接进入 Zed Industries，不附带任何特权。
 
-本汉化版由 **ReachForStar** 独立维护，与 Zed Industries 无隶属关系。如果你认可这份本地化工作，欢迎扫码支持本仓库的持续维护：
+本汉化版由 **red-blakTree** 独立维护，与 Zed Industries 无隶属关系。如果你认可这份本地化工作，欢迎扫码支持本仓库的持续维护：
 
 | 微信支付 | 支付宝 |
 |:---:|:---:|
